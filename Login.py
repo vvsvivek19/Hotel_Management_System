@@ -255,13 +255,13 @@ class Register:
     #Below function performs some data validation
     def register_data(self):
         if self.var_fname.get() == '' or self.var_email.get() == '' or self.var_securityQ == 'Select':
-            messagebox.showerror('Error',"All fields are required!")
+            messagebox.showerror('Error',"All fields are required!",parent=self.root)
         elif self.var_contact.get()=='' or self.var_email.get()=='':
-            messagebox.showerror('Error',"All fields are required!")
+            messagebox.showerror('Error',"All fields are required!",parent=self.root)
         elif self.var_pass.get() != self.var_confpass.get():
-            messagebox.showerror("Error","Password & Confirm Password Must be Same!")
+            messagebox.showerror("Error","Password & Confirm Password Must be Same!",parent=self.root)
         elif self.var_check.get() == 0:
-            messagebox.showerror("Error","Please Agree our terms and conditions!")
+            messagebox.showerror("Error","Please Agree our terms and conditions!",parent=self.root)
         else:
             conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hospital_management_system')
             my_cursor = conn.cursor()
