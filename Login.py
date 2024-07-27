@@ -72,7 +72,7 @@ class Login_Window:
         if self.txtuser.get() == "" or self.txtpass.get() == "":
             messagebox.showerror("Error","All Fields Required!")
         else:
-            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hospital_management_system')
+            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
             my_cursor = conn.cursor()
             my_cursor.execute("SELECT * FROM register WHERE email = %s and password=%s",(
                 self.txtuser.get(),
@@ -96,7 +96,7 @@ class Login_Window:
         if self.txtuser.get() == '':
             messagebox.showerror('Error','Please Enter email to reset the password')
         else:
-            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hospital_management_system')
+            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
             my_cursor = conn.cursor()
             query = ("SELECT * FROM register where email = %s")
             value = (self.txtuser.get(),)
@@ -143,7 +143,7 @@ class Login_Window:
         elif  self.new_password_entry.get() == '':
             messagebox.showerror('Error','Please Enter a Password',parent=self.root2)
         else:
-            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hospital_management_system')
+            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
             my_cursor = conn.cursor()
             query = ('SELECT * FROM register WHERE email=%s and securityQ=%s and securityA=%s')
             value = (self.txtuser.get(),self.combo_security_Q.get(),self.security_A_entry.get())
@@ -263,7 +263,7 @@ class Register:
         elif self.var_check.get() == 0:
             messagebox.showerror("Error","Please Agree our terms and conditions!",parent=self.root)
         else:
-            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hospital_management_system')
+            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
             my_cursor = conn.cursor()
             query = ("SELECT * FROM register WHERE email=%s")
             value = (self.var_email.get(),)

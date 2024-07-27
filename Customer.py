@@ -204,7 +204,7 @@ class Cust_Win:
             messagebox.showerror('Input Error', 'Please Enter Mobile Numbr and Name',parent=self.root)
         else:
             try:
-                conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hospital_management_system')
+                conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
                 my_cursor = conn.cursor()
                 my_cursor.execute("INSERT INTO customer VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (
                     self.var_ref.get(),

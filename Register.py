@@ -106,7 +106,7 @@ class Register:
         elif self.var_check.get() == 0:
             messagebox.showerror("Error","Please Agree our terms and conditions!")
         else:
-            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hospital_management_system')
+            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
             my_cursor = conn.cursor()
             #checking whether already exists or not
             query = ("SELECT * FROM register WHERE email=%s")
