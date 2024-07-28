@@ -14,7 +14,6 @@ class HotelManagementSystem:
         self.root.geometry('1550x800+0+0')
         self.root.state('zoomed')
 
-       
         #----------------First Image - Hotel Managment System----------------------------
 
         img1 = Image.open(r'D:\Dev Role Prep\Projects\Hotel_Management_System\Images\Hotel_Background.png')
