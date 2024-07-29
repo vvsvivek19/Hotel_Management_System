@@ -6,6 +6,7 @@ import mysql.connector
 import random
 
 from Customer import *
+from Room_Booking import *
 
 class HotelManagementSystem:
     def __init__(self,root):
@@ -44,19 +45,19 @@ class HotelManagementSystem:
         btn_frame = Frame(main_frame,bd=3,relief=RIDGE)
         btn_frame.place(x=0,y=35,width=250,height=200)
 
-        cust_btn = Button(btn_frame,command=self.cust_details,width=20,text='CUSTOMER',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2')
+        cust_btn = Button(btn_frame,command=self.cust_details,width=20,text='REGISTER CUSTOMER',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         cust_btn.grid(row=0,column=0,pady=1)
 
-        room_btn = Button(btn_frame,width=20,text='ROOMS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2')
+        room_btn = Button(btn_frame,command=self.room_booking,width=20,text='ROOM BOOKING',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         room_btn.grid(row=1,column=0,pady=1)
 
-        details_btn = Button(btn_frame,width=20,text='DETAILS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2')
+        details_btn = Button(btn_frame,width=20,text='DETAILS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         details_btn.grid(row=2,column=0,pady=1)
 
-        report_btn = Button(btn_frame,width=20,text='REPORT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2')
+        report_btn = Button(btn_frame,width=20,text='REPORT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         report_btn.grid(row=3,column=0,pady=1)
 
-        logout_btn = Button(btn_frame,width=20,text='LOGOUT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2')
+        logout_btn = Button(btn_frame,width=20,text='LOGOUT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         logout_btn.grid(row=4,column=0,pady=1)
 
         #--------------------RIGHT SIDE IMAGE------------------------------------
@@ -68,7 +69,7 @@ class HotelManagementSystem:
         lbl_img3 = Label(main_frame, image=self.photoimage3,bd=3,relief=RIDGE)
         lbl_img3.place(x=250,y=0,width=1300,height=660)
 
-         #--------------------DOWN SIDE IMAGE------------------------------------
+        #--------------------DOWN SIDE IMAGE------------------------------------
 
         img4 = Image.open(r'D:\Dev Role Prep\Projects\Hotel_Management_System\Images\Food1.png')
         img4 = img4.resize((700,200),Image.LANCZOS)
@@ -87,6 +88,10 @@ class HotelManagementSystem:
     def cust_details(self):
         self.new_window = Toplevel(self.root)
         self.app = Cust_Win(self.new_window)
+    
+    def room_booking(self):
+        self.new_window = Toplevel(self.root)
+        self.app = Room_Booking(self.new_window)
 if __name__ == '__main__':
     win = Tk()
     app = HotelManagementSystem(win)

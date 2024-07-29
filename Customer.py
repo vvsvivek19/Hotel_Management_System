@@ -11,7 +11,7 @@ class Cust_Win:
         self.root.title('Customer')
         self.root.geometry('1275x610+250+170')
 
-         #-----------------Variables------------------------------------------------------
+        #-----------------Variables------------------------------------------------------
         self.var_ref = StringVar()
         x = random.randint(1000,9999)
         self.var_ref.set(str(x))
@@ -137,7 +137,7 @@ class Cust_Win:
         btnAdd = Button(btn_frame,command=self.reset_data,text='Reset',width=18, height=2,font=('Segoe UI,',12,'bold'),bg='black',fg='gold',activebackground='black',activeforeground='gold')
         btnAdd.grid(row=1,column=1,padx=4,pady=7)
 
-        #----------------------------Table Frame for Search---------------------------------
+        #----------------------------Table Frame for Search System---------------------------------
         Table_Frame = LabelFrame(self.root,bd=2,relief=RIDGE,text='View Details and Search System',padx=4,font=('Segoe UI,',15,'bold'))
         Table_Frame.place(x=430,y=40,width=840,height=565)
 
@@ -154,10 +154,10 @@ class Cust_Win:
         txtSearch = ttk.Entry(Table_Frame,textvariable=self.text_search,width=28,font=('Segoe UI,',12,'bold'))
         txtSearch.grid(row=0,column=2,padx=3)
 
-        btnSearch = Button(Table_Frame,command=self.search_data,text='Search',width=10,font=('Segoe UI,',12,'bold'),bg='black',fg='gold',activebackground='black',activeforeground='gold')
+        btnSearch = Button(Table_Frame,command=self.search_data,text='Search',width=13,font=('Segoe UI,',8,'bold'),bg='black',fg='gold',activebackground='black',activeforeground='gold')
         btnSearch.grid(row=0,column=4,padx=3)
 
-        btnShowAll = Button(Table_Frame,command=self.fetch_data,text='Show All',width=8,font=('Segoe UI,',12,'bold'),bg='black',fg='gold',activebackground='black',activeforeground='gold')
+        btnShowAll = Button(Table_Frame,command=self.fetch_data,text='Show All',width=13,font=('Segoe UI,',8,'bold'),bg='black',fg='gold',activebackground='black',activeforeground='gold')
         btnShowAll.grid(row=0,column=5,padx=3)
 
         #----------------------------Show data table---------------------------------
@@ -311,7 +311,7 @@ class Cust_Win:
     def search_data(self):
         conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
         my_cursor = conn.cursor()
-        my_cursor.execute('SELECT * FROM customer WHERE ' + str(self.search_var.get()) + "=" + str(self.text_search.get()))
+        my_cursor.execute('SELECT * FROM customer WHERE ' + str(self.search_var.get()) + "= '" + str(self.text_search.get()) + "'")
         rows = my_cursor.fetchall()
         if len(rows)!=0:
             self.Cust_Details_Table.delete(*self.Cust_Details_Table.get_children())
