@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from tkinter import messagebox
 import mysql.connector
+from Hotel import HotelManagementSystem 
 
 def main():
     win = Tk()
@@ -45,7 +46,7 @@ class Login_Window:
         #Password Label and Entry
         password = Label(frame,text='Password',font=('Sans',15,'bold'),fg='black',bg='#e1a363')
         password.place(relx=0.38,rely=0.49)
-        self.txtpass = ttk.Entry(frame,font=('Sans',15))
+        self.txtpass = ttk.Entry(frame,font=('Sans',15),show='*')
         self.txtpass.place(relx=0.20,rely=0.57,relwidth=0.60) 
 
         #Login Button
@@ -84,7 +85,8 @@ class Login_Window:
             else:
                 open_main = messagebox.askyesno("Verify yourself","Access only admin")
                 if open_main > 0:
-                    pass
+                    self.new_window = Toplevel(self.root)
+                    self.app = HotelManagementSystem(self.new_window)
                 else: 
                     if not open_main:
                         return

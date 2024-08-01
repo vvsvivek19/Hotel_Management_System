@@ -55,10 +55,10 @@ class HotelManagementSystem:
         details_btn = Button(btn_frame,command=self.details,width=20,text='MANAGE ROOMS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         details_btn.grid(row=2,column=0,pady=1)
 
-        report_btn = Button(btn_frame,width=20,text='REPORT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
+        report_btn = Button(btn_frame,width=20,text='DEV DETAILS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         report_btn.grid(row=3,column=0,pady=1)
 
-        logout_btn = Button(btn_frame,width=20,text='LOGOUT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
+        logout_btn = Button(btn_frame,command=self.logout,width=20,text='LOGOUT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         logout_btn.grid(row=4,column=0,pady=1)
 
         #--------------------RIGHT SIDE IMAGE------------------------------------
@@ -97,6 +97,9 @@ class HotelManagementSystem:
     def details(self):
         self.new_window = Toplevel(self.root)
         self.app = Room_Management(self.new_window)
+
+    def logout(self):
+        self.root.destroy()
 if __name__ == '__main__':
     win = Tk()
     app = HotelManagementSystem(win)

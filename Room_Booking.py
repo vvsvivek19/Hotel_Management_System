@@ -67,18 +67,35 @@ class Room_Booking:
         #Room Type
         label_RoomType = Label(labelframeleft,text="Room Type: ",font=('Segoe UI,',12,'bold'),padx=2,pady=6)
         label_RoomType.grid(row=3,column=0,sticky=W)
-
-        combo_RoomType = ttk.Combobox(labelframeleft,textvariable=self.var_roomtype,width=26,font=('Segoe UI,',12,'bold'), state='readonly')
-        combo_RoomType['value'] = ("Select","Single","Double","Luxury")
-        combo_RoomType.current(0)
-        combo_RoomType.grid(row=3,column=1,sticky=W)
+        txt_RoomType = ttk.Entry(labelframeleft,textvariable=self.var_roomtype,width=28,font=('Segoe UI,',12,'bold'))
+        txt_RoomType.grid(row=3,column=1,sticky=W)
+        def set_roomtype(event):
+            conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
+            my_cursor = conn.cursor()
+            query = "SELECT RoomType from room_management WHERE RoomNo = %s"
+            selected_room_number = self.var_roombooked.get()
+            my_cursor.execute(query,(selected_room_number,))
+            row = my_cursor.fetchone()
+            if row:
+                self.var_roomtype.set(row[0])
+            conn.commit()
+            conn.close()
 
         #Available Room
         lbl_Available_Room = Label(labelframeleft,text='Room No: ',font=('Segoe UI,',12,'bold'),padx=2,pady=6)
         lbl_Available_Room.grid(row=4,column=0,sticky=W)
-        txt_Available_Room = ttk.Entry(labelframeleft,textvariable=self.var_roombooked,width=28,font=('Segoe UI,',12,'bold'))
-        txt_Available_Room.grid(row=4,column=1)
-
+        
+        conn = mysql.connector.connect(host='localhost',user='root',password='Vivek1465',database='hotel_management_system')
+        my_cursor = conn.cursor()
+        my_cursor.execute("select RoomNo from room_management")
+        rows = my_cursor.fetchall()
+        combo_RoomNo = ttk.Combobox(labelframeleft,textvariable=self.var_roombooked,width=26,font=('Segoe UI,',12,'bold'), state='readonly')
+        combo_RoomNo['value'] = rows
+        combo_RoomNo.current(0)
+        combo_RoomNo.grid(row=4,column=1,sticky=W)
+        combo_RoomNo.bind("<<ComboboxSelected>>",set_roomtype)
+    
+        
         #Meal
         lbl_Meal = Label(labelframeleft,text='Meal: ',font=('Segoe UI,',12,'bold'),padx=2,pady=6)
         lbl_Meal.grid(row=5,column=0,sticky=W)
@@ -204,7 +221,7 @@ class Room_Booking:
                     self.var_meal.get(),
                     self.var_noofdays.get()))
                 conn.commit()
-                # self.fetch_data()
+                self.fetch_data()
                 conn.close()
                 messagebox.showinfo('Success','Your Room is Booked',parent=self.root)
             except Exception as m:
@@ -281,6 +298,9 @@ class Room_Booking:
         self.var_total.set("")
         self.text_search.set("")
 
+    
+
+        
     #--------------------------Fetching data frame----------------------------------------------
     def fetch_contact(self):
         if self.var_contact.get() == "":
@@ -292,7 +312,7 @@ class Room_Booking:
             rows = my_cursor.fetchone()
 
             if rows == None:
-                messagebox.showerror('Error',"This number doesn't Exist!")
+                messagebox.showerror('Error',"This number doesn't Exist!",parent=self.root)
             else:
                 conn.commit()
                 conn.close()
@@ -473,7 +493,7 @@ class Room_Booking:
             self.var_actualtotal.set(sub_total)
             self.var_total.set(total_charge)
         elif (self.var_meal.get() == 'Breakfast' and self.var_roomtype.get() == 'Luxury'):
-            meal_charge = float(100)
+            meal_charge = float(130)
             room_charge = float(1000)
             num_of_days = float(self.var_noofdays.get())
             total_perday_charge = meal_charge + room_charge
@@ -485,18 +505,6 @@ class Room_Booking:
             self.var_actualtotal.set(sub_total)
             self.var_total.set(total_charge)
         elif (self.var_meal.get() == 'Lunch' and self.var_roomtype.get() == 'Luxury'):
-            meal_charge = float(120)
-            room_charge = float(1000)
-            num_of_days = float(self.var_noofdays.get())
-            total_perday_charge = meal_charge + room_charge
-            gross_charge = total_perday_charge * num_of_days
-            tax = "Rs. "+str("%.2f"%((gross_charge)*5.00))
-            sub_total = "Rs. "+str("%.2f"%((gross_charge)))
-            total_charge = "Rs. "+str("%.2f"%((gross_charge) + ((gross_charge)*5.00)))
-            self.var_paidtax.set(tax)
-            self.var_actualtotal.set(sub_total)
-            self.var_total.set(total_charge)
-        elif (self.var_meal.get() == 'Dinner' and self.var_roomtype.get() == 'Luxury'):
             meal_charge = float(150)
             room_charge = float(1000)
             num_of_days = float(self.var_noofdays.get())
@@ -508,6 +516,55 @@ class Room_Booking:
             self.var_paidtax.set(tax)
             self.var_actualtotal.set(sub_total)
             self.var_total.set(total_charge)
+        elif (self.var_meal.get() == 'Dinner' and self.var_roomtype.get() == 'Luxury'):
+            meal_charge = float(200)
+            room_charge = float(1000)
+            num_of_days = float(self.var_noofdays.get())
+            total_perday_charge = meal_charge + room_charge
+            gross_charge = total_perday_charge * num_of_days
+            tax = "Rs. "+str("%.2f"%((gross_charge)*5.00))
+            sub_total = "Rs. "+str("%.2f"%((gross_charge)))
+            total_charge = "Rs. "+str("%.2f"%((gross_charge) + ((gross_charge)*5.00)))
+            self.var_paidtax.set(tax)
+            self.var_actualtotal.set(sub_total)
+            self.var_total.set(total_charge)
+        elif (self.var_meal.get() == 'Breakfast' and self.var_roomtype.get() == 'Duplex'):
+            meal_charge = float(200)
+            room_charge = float(1500)
+            num_of_days = float(self.var_noofdays.get())
+            total_perday_charge = meal_charge + room_charge
+            gross_charge = total_perday_charge * num_of_days
+            tax = "Rs. "+str("%.2f"%((gross_charge)*5.00))
+            sub_total = "Rs. "+str("%.2f"%((gross_charge)))
+            total_charge = "Rs. "+str("%.2f"%((gross_charge) + ((gross_charge)*5.00)))
+            self.var_paidtax.set(tax)
+            self.var_actualtotal.set(sub_total)
+            self.var_total.set(total_charge)
+        elif (self.var_meal.get() == 'Lunch' and self.var_roomtype.get() == 'Duplex'):
+            meal_charge = float(220)
+            room_charge = float(1500)
+            num_of_days = float(self.var_noofdays.get())
+            total_perday_charge = meal_charge + room_charge
+            gross_charge = total_perday_charge * num_of_days
+            tax = "Rs. "+str("%.2f"%((gross_charge)*5.00))
+            sub_total = "Rs. "+str("%.2f"%((gross_charge)))
+            total_charge = "Rs. "+str("%.2f"%((gross_charge) + ((gross_charge)*5.00)))
+            self.var_paidtax.set(tax)
+            self.var_actualtotal.set(sub_total)
+            self.var_total.set(total_charge)
+        elif (self.var_meal.get() == 'Dinner' and self.var_roomtype.get() == 'Duplex'):
+            meal_charge = float(250)
+            room_charge = float(1500)
+            num_of_days = float(self.var_noofdays.get())
+            total_perday_charge = meal_charge + room_charge
+            gross_charge = total_perday_charge * num_of_days
+            tax = "Rs. "+str("%.2f"%((gross_charge)*5.00))
+            sub_total = "Rs. "+str("%.2f"%((gross_charge)))
+            total_charge = "Rs. "+str("%.2f"%((gross_charge) + ((gross_charge)*5.00)))
+            self.var_paidtax.set(tax)
+            self.var_actualtotal.set(sub_total)
+            self.var_total.set(total_charge)
+
 
 
 if __name__ == '__main__':
