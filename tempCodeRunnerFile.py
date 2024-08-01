@@ -1,1 +1,16 @@
-roombooked
+self.room_table.heading("contact",text="Contact No")
+        self.room_table.heading("checkin",text="Check-in")
+        self.room_table.heading("checkout",text="Check-out")
+        self.room_table.heading("roomtype",text="Room Type")
+        self.room_table.heading("roombooked",text="Room no")
+        self.room_table.heading("meal",text="Meal")
+        self.room_table.heading("noOfdays",text="No. of Days")
+
+        self.room_table["show"] = "headings"
+        self.room_table.column("contact",width=100)
+        self.room_table.column("checkin",width=100)
+        self.room_table.column("checkout",width=100)
+        self.room_table.column("roomtype",width=100)
+        self.room_table.column("roombooked",width=100)
+        self.room_table.column("meal",width=100)
+        self.room_table.column("noOfdays",width=100)

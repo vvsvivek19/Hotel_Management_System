@@ -7,6 +7,7 @@ import random
 
 from Customer import *
 from Room_Booking import *
+from Room_Management import *
 
 class HotelManagementSystem:
     def __init__(self,root):
@@ -51,7 +52,7 @@ class HotelManagementSystem:
         room_btn = Button(btn_frame,command=self.room_booking,width=20,text='ROOM BOOKING',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         room_btn.grid(row=1,column=0,pady=1)
 
-        details_btn = Button(btn_frame,width=20,text='DETAILS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
+        details_btn = Button(btn_frame,command=self.details,width=20,text='MANAGE ROOMS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         details_btn.grid(row=2,column=0,pady=1)
 
         report_btn = Button(btn_frame,width=20,text='REPORT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
@@ -92,6 +93,10 @@ class HotelManagementSystem:
     def room_booking(self):
         self.new_window = Toplevel(self.root)
         self.app = Room_Booking(self.new_window)
+    
+    def details(self):
+        self.new_window = Toplevel(self.root)
+        self.app = Room_Management(self.new_window)
 if __name__ == '__main__':
     win = Tk()
     app = HotelManagementSystem(win)
