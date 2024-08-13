@@ -44,7 +44,7 @@ class HotelManagementSystem:
 
         #-------------------Button Frame-----------------------------------------
         btn_frame = Frame(main_frame,bd=3,relief=RIDGE)
-        btn_frame.place(x=0,y=35,width=250,height=200)
+        btn_frame.place(x=0,y=35,width=250,height=250)
 
         cust_btn = Button(btn_frame,command=self.cust_details,width=20,text='REGISTER CUSTOMER',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         cust_btn.grid(row=0,column=0,pady=1)
@@ -55,11 +55,14 @@ class HotelManagementSystem:
         details_btn = Button(btn_frame,command=self.details,width=20,text='MANAGE ROOMS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         details_btn.grid(row=2,column=0,pady=1)
 
-        report_btn = Button(btn_frame,width=20,text='DEV DETAILS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
+        report_btn = Button(btn_frame,width=20,text='REPORT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
         report_btn.grid(row=3,column=0,pady=1)
 
+        devDetails_btn = Button(btn_frame,width=20,text='DEV DETAILS',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
+        devDetails_btn.grid(row=4,column=0,pady=1)
+
         logout_btn = Button(btn_frame,command=self.logout,width=20,text='LOGOUT',font=('Sans',15,'bold'),bg='#8beb8b',fg='#132131',bd=0,cursor='hand2',activebackground='#8beb8b',activeforeground='#132131')
-        logout_btn.grid(row=4,column=0,pady=1)
+        logout_btn.grid(row=5,column=0,pady=1)
 
         #--------------------RIGHT SIDE IMAGE------------------------------------
 
@@ -77,14 +80,14 @@ class HotelManagementSystem:
         self.photoimage4 = ImageTk.PhotoImage(img4)
         
         lbl_img4 = Label(main_frame, image=self.photoimage4,bd=3,relief=RIDGE)
-        lbl_img4.place(x=0,y=235,width=250,height=200)
+        lbl_img4.place(x=0,y=280,width=250,height=200)
 
         img5 = Image.open(r'D:\Dev Role Prep\Projects\Hotel_Management_System\Images\Food2.png')
         img5 = img5.resize((500,250),Image.LANCZOS)
         self.photoimage5 = ImageTk.PhotoImage(img5)
         
         lbl_img5 = Label(main_frame, image=self.photoimage5,bd=3,relief=RIDGE)
-        lbl_img5.place(x=0,y=430,width=250,height=240)
+        lbl_img5.place(x=0,y=470,width=250,height=200)
 
     def cust_details(self):
         self.new_window = Toplevel(self.root)
