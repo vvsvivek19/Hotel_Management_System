@@ -1,0 +1,8 @@
+- Login Module: Login and Logout Functionality for admin users.
+- Password reset module: For resetting passwords of admin.
+- Registration Module: For Registering the Admins
+- Room Booking Module: Booking Room for customer.
+- Customer Details Modules: Taking important information from customer
+- Room Management Module: Adding new rooms to Hotel
+- Report Module: Creates a Report.
+- Staff Data Module: Stores information related to Staff
